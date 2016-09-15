@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    <h3><a href="/newpost">New Blog Post</a></h3>
+    <h3><a href="/blog">View Blogs</a></h3>
+</ul>
+
+<p class="error">{{ error if error else "" }}</p>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<label name="counter">Displaying Posts {{ disp_page1 }} through {{ disp_page2 }}</label>
+<br>
+
+<table>
+    <tr>
+    <td>Go to Page:</td>
+{% for page in html_pages %}
+    <td><a href="/blog?page={{ page }}">{{ page }}</a></td>
+{% endfor %}
+    <td><a href="/blog?page=all">View All</a></td>
+    </tr>
+</table>
+
+<br>
+<table class="buttons">
+    <tr>
+        <td>
+            {% autoescape false %}
+            <form>{{ previous }} {{ next }}</form>
+            {% endautoescape %}
+        </td>
+    </tr>
+</table>
+
+{% for post in posts %}
+<table class="blog-border">
+	<tr>
+        <td class="blog-title"><strong>Title:</strong></td>
+    	<td class="blog-title" width="100%"><a href="/blog/{{ post.key().id() }}">{{ post.title }}</a><input type="hidden" name="blog-post" value="{{ post.key().id() }}"/></td>
+    </tr>
+    <tr>
+        <td><strong>Added:</strong></td>
+        <td width="100%">{{ post.added }}</td>
+    <tr>
+        <td><strong>Post:</strong></td>
+        <td width="100%">{{ post.text }}</td>
+    </tr>
+    <br>
+</table>
+{% endfor %}
+
+{% endblock %}

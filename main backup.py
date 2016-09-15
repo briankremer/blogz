@@ -10,8 +10,6 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True,
                                extensions = ['jinja2.ext.autoescape'])
 
-def get_posts(limit, offset):
-    return db.GqlQuery("SELECT * FROM Blog ORDER BY added DESC LIMIT 5 OFFSET " + str(offset))
 
 class Blog(db.Model):
     title = db.StringProperty(required = True)
@@ -99,27 +97,18 @@ class BlogPosts(Handler):
         clicked_page = self.request.get("page")
         disp_page1 = ""
         disp_page2 = ""
-        next = ""
-        previous = ""
         if clicked_page:    
             if clicked_page == "all":
                 blog_posts = db.GqlQuery("SELECT * FROM Blog ORDER BY added DESC")
                 disp_page1 = "1"
                 disp_page2 = str(count)
-                previous = ""
-                next = ""
             else:
                 goto_page = int(clicked_page) * 5 - 5
-                #blog_posts = db.GqlQuery("SELECT * FROM Blog ORDER BY added DESC LIMIT 5 OFFSET " + str(goto_page))
-                blog_posts = get_posts(5, goto_page)
+                blog_posts = db.GqlQuery("SELECT * FROM Blog ORDER BY added DESC LIMIT 5 OFFSET " + str(goto_page))
                 if (int(clicked_page) * 5 - 5) == 0:
                     disp_page1 = "1"
-                    previous = ""
-                    #next = '<td><a href="/blog?page=' + str(int(clicked_page) + 1) +'">Next</a></td>'
                 else:
                     disp_page1 = str(int(clicked_page) * 5 - 5)
-                    previous = '<td><a href="/blog?page=' + str(int(clicked_page) - 1) +'">Previous</a></td>'
-                    #next = '<td><a href="/blog?page=' + str(int(clicked_page) + 1) +'">Next</a></td>'
                 if count < (int(clicked_page) * 5):
                     disp_page2 = count
                 else:
@@ -128,7 +117,6 @@ class BlogPosts(Handler):
             blog_posts = db.GqlQuery("SELECT * FROM Blog ORDER BY added DESC LIMIT 5")
             disp_page1 = "1"
             disp_page2 = "5"
-            #next = '<td><a href="/blog?page=1">Next</a></td>'
 
         add_to = 0
         if count % 5 > 0:
@@ -140,36 +128,11 @@ class BlogPosts(Handler):
         for x in range(page_count):
             html_pages.append(x + 1)
 
-
-        if clicked_page:
-            if clicked_page == "all":
-                previous = ""
-                next = ""
-            else:
-                if int(clicked_page) >= page_count:
-                    #previous = '<td><a href="/blog?page=' + str(int(clicked_page) - 1) +'">Previous</a></td>'
-                    previous = '<a href="/blog?page=' + str(int(clicked_page) - 1) +'">Previous</a>'
-                    next = ""
-                elif int(clicked_page) == 1:
-                    previous = ""
-                    #next = '<td><a href="/blog?page=' + str(int(clicked_page) + 1) +'">Next</a></td>'
-                    next = '<a href="/blog?page=' + str(int(clicked_page) + 1) +'">Next</a>'
-                else:
-                    #previous = '<td><a href="/blog?page=' + str(int(clicked_page) - 1) +'">Previous</a></td>'
-                    #next = '<td><a href="/blog?page=' + str(int(clicked_page) + 1) +'">Next</a></td>'
-                    previous = '<a href="/blog?page=' + str(int(clicked_page) - 1) + '">Previous</a>'
-                    next = '<a href="/blog?page=' + str(int(clicked_page) + 1) + '">Next</a>'
-        else:
-            previous = ""
-            next = '<td><a href="/blog?page=2">Next</a></td>'
-
         t = jinja_env.get_template("blog.html")
         response = t.render(
                         posts = blog_posts,
                         disp_page1 = disp_page1,
                         disp_page2 = disp_page2,
-                        previous = previous,
-                        next = next,
                         html_pages = html_pages,
                         count = count,
                         error = self.request.get("error"))

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p><h3>A new blog has been added!</h3><br>
+    <label><strong>Title: </strong>{{ blog_post.title }}</label>
+    <br>
+    <label><strong>Added: </strong>{{ blog_post.added }}</label>
+</p>
+<a href="/newpost" class="button">Add Another Blog</a>
+<br>
+<a href="/blog" class="button">View Blog</a>
+{% endblock %}

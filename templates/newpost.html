@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <form action="/newpost" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label>Blog Title</label>
+                    </td>
+                    <td>
+                        <input class="blog-title" type="text" name="blog-title" value="{{ title }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Blog Text</label>
+                    </td>
+                    <td>
+                        <textarea type="text" name="blog-text">{{ text }}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Post"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <p class="error">{{ error if error else "" }}</p>
+{% endblock %}        
