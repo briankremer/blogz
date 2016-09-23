@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Build-A-Blog</title>
+        <style type="text/css">
+            
+            .error {
+                color: red;
+            }
+
+            .blog-title {
+                width: 540px;
+            }
+            textarea {
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }
+
+            button {
+                appearance: button;
+
+                text-decoration: none;
+                color: initial;
+            }
+            
+            .hidden {
+                visibility: hidden;
+            }
+
+            .blog-border {
+                border-style: solid;
+                border-width: 2px;
+            }
+
+            .buttons {
+                margin: 0 auto;
+            }
+
+        </style>
+    </head>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<h1>Login</h1>
+    <body>
+        <p class="error">{{ error }}</p>
+        <form method="post">
+            <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td>
+                        <input name="username" type="text" value="{{ username }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td>
+                        <input name="password" type="password">
+                    </td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
+        <p>Don't have an account? <a href="/register">Create one!</a></p>
+    </body>
+</html>

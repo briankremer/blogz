@@ -2,7 +2,7 @@
 
 {% block content %}
 <p>
-	<label><strong>Congratulations! A new blog has been added!</strong></label>
+	<label><strong>Congratulations {{ LoggedInUser }}! Your blog has been added!</strong></label>
     <br>
     <label><strong>Title: </strong>{{ blog_post.title }}</label>
     <br>

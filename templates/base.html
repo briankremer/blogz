@@ -37,14 +37,53 @@
                 margin: 0 auto;
             }
 
+            .logout {
+                text-align: right;
+            }
+
+            .table-data {
+                margin: 0 auto;
+                width: 100%;
+                text-align: center;
+            }
+
+            .page-header {
+                font-size: 30px;
+            }
+
+            .page-links {
+                font-size: 20px;
+                border: 2px solid black;
+            }
+
+            .home-page {
+                margin: 0 auto;
+                width: 100%;
+                text-align: center;
+            }
+
+            .link {
+            }
+
         </style>
     </head>
     <body>
-        <h1><a href="/">Build-A-Blog</a></h1>
-        <ul>
-            <h3><a href="/newpost">New Blog Post</a></h3>
-            <h3><a href="/blog">View Blogs</a></h3>
-        </ul>
+        <table class="home-page">
+            <tr>
+                <th colspan="4" class="logout">Welcome {{ LoggedInUser }}! <a href="/logout">Logout</a></th>
+            </tr>
+            <tr>
+                <th colspan="4" class="page-header">Build-A-Blog</th>
+            </tr>
+            <tr class="page-links">
+                <div class="link"></div><td width="25%"><a href="/">Home</a></td></div>
+                <div class="link"><td width="25%"><a href="/newpost">New Blog Post</a></td></div>
+                <div class="link"><td width="25%"><a href="/blog">All Blogs</a></td></div>
+                <div class="link"><td width="25%"><a href="/blog?user={{ userID }}">My Blogs</a></td></div>
+            </tr>
+        </table>
+
+        <p>{{ welcome }}</p>
 
         {% block content %}
         {% endblock %}

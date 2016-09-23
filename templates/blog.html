@@ -34,8 +34,13 @@
     	<td class="blog-title" width="100%"><a href="/blog/{{ post.key().id() }}">{{ post.title }}</a><input type="hidden" name="blog-post" value="{{ post.key().id() }}"/></td>
     </tr>
     <tr>
+        <td><strong>Author:</strong></td>
+        <td width="100%">{{ post.owner.username }}</td>
+    </tr>
+    <tr>
         <td><strong>Added:</strong></td>
         <td width="100%">{{ post.added }}</td>
+    </tr>
     <tr>
         <td><strong>Post:</strong></td>
         <td width="100%">{{ post.text }}</td>

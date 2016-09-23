@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Build-A-Blog</title>
+        <style type="text/css">
+            
+            .error {
+                color: red;
+            }
+
+            .blog-title {
+                width: 540px;
+            }
+            textarea {
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }
+
+            button {
+                appearance: button;
+
+                text-decoration: none;
+                color: initial;
+            }
+            
+            .hidden {
+                visibility: hidden;
+            }
+
+            .blog-border {
+                border-style: solid;
+                border-width: 2px;
+            }
+
+            .buttons {
+                margin: 0 auto;
+            }
+
+        </style>
+    </head>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<h1>Signup</h1>
+    <body>
+        <form method="post">
+            <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td>
+                        <input name="username" type="text" value="{{ username }}">
+                        <span class="error">{{ errors.username_error }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td>
+                        <input name="password" type="password">
+                        <span class="error">{{ errors.password_error }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="verify">Verify Password</label></td>
+                    <td>
+                        <input name="verify" type="password">
+                        <span class="error">{{ errors.verify_error }}</span>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
+
+        <p>
+            Already have an account? <a href="/login">Log in</a>
+        </p>
+    </body>
+</html>
